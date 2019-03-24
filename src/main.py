@@ -8,9 +8,12 @@ def main() -> None:
     parser.add_argument('twitter', type=str)
 
     args = parser.parse_args()
-    melbGrid = helper.MelbGrid(args.melbgrid)
-    
+    melb_grid = helper.MelbGrid(args.melbgrid)
 
+    twitter_reader = helper.TwitterReader(args.twitter)
+
+    for i in range(100):
+        print(twitter_reader.read_one_twitter())
 
 if __name__ == "__main__":
     main()

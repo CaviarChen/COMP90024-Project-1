@@ -32,7 +32,7 @@ class TwitterReader:
         self._file = open(file_name, 'r')
         # ignore the first line (eg. "{"total_rows":3877777,"offset":805584,"rows":[")
         self._file.readline()
-        self._line_count = -1
+        self._line_count = 0
         self._line_skip_num = 1
         self._line_skip_offset = 0
     
@@ -41,8 +41,21 @@ class TwitterReader:
         self._line_skip_offset = offset
 
     def read_one_twitter(self) -> Optional[Tuple[int, List[float], List[str]]]:
-        self._line_count += 1
-        return None
+        while self._line_count % self._line_skip_num != self._line_skip_offset:
+            self._file.readline()
+            self._line_count += 1
+        
+        line: str = self._file.readline()
+        # check end of file
+        if line == '' or line.strip() == ']}':
+            return None
+        
+        # parse row
+        data = json.loads(line.rstrip(",\r\n "))
+        coord = list(map(float, data['value']['geometry']['coordinates']))
+        hashtags = [str(item['text']) for item in data['doc']['entities']['hashtags']]
+
+        return (self._line_count, coord, hashtags)
 
     def __del__(self) -> None:
         self._file.close()
