@@ -1,0 +1,19 @@
+language: python
+python:
+  - "3.7"
+
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+
+# Only clone the most recent commit.
+git:
+  depth: 1
+
+# Don't email me
+notifications:
+  email: false
+
+# command to run tests
+script:
+  - mypy src/main.py

@@ -1,6 +1,8 @@
 # python virtual environment
 /venv
 
+### VisualStudioCode ###
+.vscode
 
 # Created by https://www.gitignore.io/api/macos,linux,python,windows,pycharm+all
 # Edit at https://www.gitignore.io/?templates=macos,linux,python,windows,pycharm+all
