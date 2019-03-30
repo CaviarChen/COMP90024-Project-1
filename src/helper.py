@@ -41,6 +41,7 @@ class TwitterReader:
         self._line_skip_offset = offset
 
     def read_one_twitter(self) -> Optional[Tuple[int, List[float], List[str]]]:
+        # skip rows that should not be handled on this node
         while self._line_count % self._line_skip_num != self._line_skip_offset:
             self._file.readline()
             self._line_count += 1
@@ -51,9 +52,15 @@ class TwitterReader:
             return None
         
         # parse row
-        data = json.loads(line.rstrip(",\r\n "))
-        coord = list(map(float, data['value']['geometry']['coordinates']))
-        hashtags = [str(item['text']) for item in data['doc']['entities']['hashtags']]
+        try:
+            data = json.loads(line.rstrip(",\r\n "))
+            coord = list(map(float, data['value']['geometry']['coordinates']))
+            hashtags = [str(item['text']) for item in data['doc']['entities']['hashtags']]
+            # remove duplicates
+            hashtags = list(set(hashtags))
+        except:
+            # parsing error
+            return (self._line_count, [], [])
 
         return (self._line_count, coord, hashtags)
 
