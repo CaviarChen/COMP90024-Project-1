@@ -25,6 +25,9 @@ class MelbGrid:
 
     def grid_idx_to_id(self, idx: int) -> str:
         return self._melb_grids[idx]['id']
+    
+    def get_grid_num(self) -> int:
+        return len(self._melb_grids)
 
 
 class TwitterReader:
@@ -66,3 +69,21 @@ class TwitterReader:
 
     def __del__(self) -> None:
         self._file.close()
+
+class GridDataCounter:
+    def __init__(self) -> None:
+        self._post_count = 0
+        self._tag_dict: Dict[str, int] = {}
+
+    def add_post(self) -> None:
+        pass
+    
+    def add_tag(self, tag: str) -> None:
+        pass
+
+    def add_tags(self, tags: List[str]) -> None:
+        for t in tags:
+            self.add_tag(t)
+
+    def marshal_data(self) -> Tuple[int, List[Tuple[str, int]]]:
+        pass
