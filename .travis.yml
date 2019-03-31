@@ -17,3 +17,4 @@ notifications:
 # command to run tests
 script:
   - mypy src/main.py
+  - python src/test.py

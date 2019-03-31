@@ -18,6 +18,8 @@ class MelbGrid:
                     'ymin': line['properties']['ymin'],
                     'ymax': line['properties']['ymax']}
             self._melb_grids.append(grid)
+        # sort melb grid by ymin and xmin values
+        self._melb_grids = sorted(self._melb_grids, key=lambda e: (-e['ymin'], e['xmin']))
 
     def find_grid_idx(self, x: float, y: float) -> Optional[int]:
         for idx, grid in enumerate(self._melb_grids):
