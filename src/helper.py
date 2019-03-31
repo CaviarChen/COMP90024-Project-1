@@ -58,7 +58,9 @@ class TwitterReader:
         try:
             data = json.loads(line.rstrip(",\r\n "))
             coord = list(map(float, data['value']['geometry']['coordinates']))
-            hashtags = [str(item['text']) for item in data['doc']['entities']['hashtags']]
+            # check that coordinates have two values
+            assert len(coord) == 2
+            hashtags = [str(item['text']).lower() for item in data['doc']['entities']['hashtags']]
             # remove duplicates
             hashtags = list(set(hashtags))
         except:

@@ -18,8 +18,7 @@ def main() -> None:
         data = twitter_reader.read_one_twitter()
         if data is None:
             break
-        (line_count, coord, hashtags) = data
-        assert len(coord) == 2
+        (_, coord, hashtags) = data
         idx = melb_grid.find_grid_idx(coord[0], coord[1])
         if idx is not None:
             counter[idx].add_post()
