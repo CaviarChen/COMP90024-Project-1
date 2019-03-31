@@ -33,7 +33,7 @@ class MelbGrid:
 
 
 class TwitterReader:
-    def __init__(self, file_name: str, node_num: int, node_index: int) -> None:
+    def __init__(self, file_name: str, node_num: int, node_rank: int) -> None:
         self._file = open(file_name, 'r')
         self._line_count = 0
 
@@ -41,8 +41,8 @@ class TwitterReader:
         file_size = os.fstat(self._file.fileno()).st_size
         chunk_size: float = file_size / node_num
         # divide file roughly based on pos
-        rough_start = int(chunk_size * node_index)
-        rough_end = int(chunk_size * (node_index + 1))
+        rough_start = int(chunk_size * node_rank)
+        rough_end = int(chunk_size * (node_rank + 1))
         # align to the next newline
         # no need to worry about the first line since we need to ignore it anyway
         # (eg. "{"total_rows":3877777,"offset":805584,"rows":[")

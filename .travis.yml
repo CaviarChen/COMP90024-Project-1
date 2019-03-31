@@ -16,4 +16,5 @@ notifications:
 
 # command to run tests
 script:
+  - sudo apt install libopenmpi-dev
   - mypy src/main.py
