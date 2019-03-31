@@ -76,14 +76,17 @@ class GridDataCounter:
         self._tag_dict: Dict[str, int] = {}
 
     def add_post(self) -> None:
-        pass
+        self._post_count += 1
     
     def add_tag(self, tag: str) -> None:
-        pass
+        if tag in self._tag_dict:
+            self._tag_dict[tag] += 1
+        else:
+            self._tag_dict[tag] = 1
 
     def add_tags(self, tags: List[str]) -> None:
         for t in tags:
             self.add_tag(t)
 
     def marshal_data(self) -> Tuple[int, List[Tuple[str, int]]]:
-        pass
+        return (self._post_count, list(self._tag_dict.items()))
