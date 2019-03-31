@@ -20,5 +20,5 @@ before_install:
 
 # command to run tests
 script:
-  - mypy --ignore-missing-imports src/main.py
+  - mypy --ignore-missing-imports --no-strict-optional src/main.py
   - python src/test.py
