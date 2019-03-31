@@ -1,6 +1,7 @@
 from typing import *
 import heapq
 import json
+import os
 
 
 class MelbGrid:
@@ -32,27 +33,35 @@ class MelbGrid:
 
 
 class TwitterReader:
-    def __init__(self, file_name: str) -> None:
+    def __init__(self, file_name: str, node_num: int, node_index: int) -> None:
         self._file = open(file_name, 'r')
-        # ignore the first line (eg. "{"total_rows":3877777,"offset":805584,"rows":[")
-        self._file.readline()
         self._line_count = 0
-        self._line_skip_num = 1
-        self._line_skip_offset = 0
-    
-    def set_line_skip(self, num: int, offset: int) -> None:
-        self._line_skip_num = num
-        self._line_skip_offset = offset
+
+        # divide file
+        file_size = os.fstat(self._file.fileno()).st_size
+        chunk_size: float = file_size / node_num
+        # divide file roughly based on pos
+        rough_start = int(chunk_size * node_index)
+        rough_end = int(chunk_size * (node_index + 1))
+        # align to the next newline
+        # no need to worry about the first line since we need to ignore it anyway
+        # (eg. "{"total_rows":3877777,"offset":805584,"rows":[")
+        self._file_start = self._align_to_newline(rough_start)
+        self._file_end = self._align_to_newline(rough_end)
+        # move to the right pos
+        self._file.seek(self._file_start)
+        
+    def _align_to_newline(self, rough_pos: int) -> int:
+        self._file.seek(rough_pos)
+        # keep read util reach a newline or EOF
+        while self._file.read(1) not in ['', '\n']:
+            pass
+        return self._file.tell()
 
     def read_one_twitter(self) -> Optional[Tuple[int, List[float], List[str]]]:
-        # skip rows that should not be handled on this node
-        while self._line_count % self._line_skip_num != self._line_skip_offset:
-            self._file.readline()
-            self._line_count += 1
-        
-        line: str = self._file.readline()
-        # check end of file
-        if line == '' or line.strip() == ']}':
+        line = self._file.readline()
+        # stop if reach the last line (eg. ']}') or reachs out of the chunk that assigned to this node
+        if self._file.tell() > self._file_end or line.strip() == ']}':
             return None
         
         # parse row

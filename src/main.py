@@ -10,9 +10,9 @@ def main() -> None:
     args = parser.parse_args()
     melb_grid = helper.MelbGrid(args.melbgrid)
 
-    counter = [helper.GridDataCounter() for _ in range(melb_grid.get_grid_num())]
+    counters = [helper.GridDataCounter() for _ in range(melb_grid.get_grid_num())]
 
-    twitter_reader = helper.TwitterReader(args.twitter)
+    twitter_reader = helper.TwitterReader(args.twitter, 1, 0)
 
     while True:
         data = twitter_reader.read_one_twitter()
@@ -21,8 +21,10 @@ def main() -> None:
         (_, coord, hashtags) = data
         idx = melb_grid.find_grid_idx(coord[0], coord[1])
         if idx is not None:
-            counter[idx].add_post()
-            counter[idx].add_tags(hashtags)
+            counters[idx].add_post()
+            counters[idx].add_tags(hashtags)
+    
+    print([c._post_count for c in counters])
     
 
 if __name__ == "__main__":
