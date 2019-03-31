@@ -1,4 +1,5 @@
 from typing import *
+from heapq import nlargest
 import json
 
 
@@ -77,15 +78,26 @@ class GridDataCounter:
         self._post_count = 0
         self._tag_dict: Dict[str, int] = {}
 
-    def add_post(self) -> None:
-        pass
+    def add_post(self, num: int = 1) -> None:
+        self._post_count += num
     
     def add_tag(self, tag: str) -> None:
-        pass
+        if tag in self._tag_dict:
+            self._tag_dict[tag] += 1
+        else:
+            self._tag_dict[tag] = 1
 
     def add_tags(self, tags: List[str]) -> None:
         for t in tags:
             self.add_tag(t)
 
     def marshal_data(self) -> Tuple[int, List[Tuple[str, int]]]:
-        pass
+        return (self._post_count, list(self._tag_dict.items()))
+
+    def get_post_count(self) -> int:
+        return self._post_count
+    
+    def get_tag_dict(self) -> Dict[str, int]:
+        # Heap to get top 5 tags
+        return nlargest(5, self._tag_dict, key=lambda e:e[1])
+
