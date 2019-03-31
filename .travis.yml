@@ -18,3 +18,4 @@ notifications:
 script:
   - sudo apt install libopenmpi-dev
   - mypy src/main.py
+  - python src/test.py
