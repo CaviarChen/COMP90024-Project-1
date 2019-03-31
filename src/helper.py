@@ -1,5 +1,5 @@
 from typing import *
-from heapq import nlargest
+import heapq
 import json
 
 
@@ -90,14 +90,17 @@ class GridDataCounter:
     def add_tags(self, tags: List[str]) -> None:
         for t in tags:
             self.add_tag(t)
+    
+    def merge_tags(self, tags: List[Tuple[str, int]]) -> None:
+        for tag in tags:
+            if tag[0] in self._tag_dict:
+                self._tag_dict[tag[0]] += tag[1]
+            else:
+                self._tag_dict[tag[0]] = tag[1]
 
     def marshal_data(self) -> Tuple[int, List[Tuple[str, int]]]:
         return (self._post_count, list(self._tag_dict.items()))
 
-    def get_post_count(self) -> int:
-        return self._post_count
-    
-    def get_tag_dict(self) -> Dict[str, int]:
-        # Heap to get top 5 tags
-        return nlargest(5, self._tag_dict, key=lambda e:e[1])
-
+    def get_result(self, n: int) -> Tuple[int, List[Tuple[str, int]]]:
+        tags = heapq.nlargest(n, self._tag_dict.items(), key= lambda x: x[1])
+        return (self._post_count, tags)
