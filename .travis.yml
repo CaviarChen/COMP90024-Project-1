@@ -14,8 +14,11 @@ git:
 notifications:
   email: false
 
+install:
+  - sudo apt install libopenmpi-dev
+  - pip install -r requirements.txt
+
 # command to run tests
 script:
-  - sudo apt install libopenmpi-dev
   - mypy src/main.py
   - python src/test.py
