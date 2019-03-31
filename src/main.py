@@ -28,7 +28,7 @@ def main() -> None:
         if idx is not None:
             counters[idx].add_post()
             counters[idx].add_tags(hashtags)
-    twitter_reader = None
+    del twitter_reader
     # print([c._post_count for c in counters])
 
     # Stage 2: collect & merge data separately (each node will be assgined some grids)
