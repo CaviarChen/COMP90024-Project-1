@@ -2,6 +2,7 @@ from typing import *
 import heapq
 import json
 import os
+import time
 
 
 class MelbGrid:
@@ -116,3 +117,20 @@ class GridDataCounter:
     def get_result(self, n: int) -> Tuple[int, List[Tuple[str, int]]]:
         tags = heapq.nlargest(n, self._tag_dict.items(), key= lambda x: x[1])
         return (self._post_count, tags)
+
+class TimeCounter:
+    def __init__(self) -> None:
+        self.start_time = time.time()
+        self.stage_time: List[float] = [None, None, None]
+    
+    def add_stage_time(self, i: int) -> None:
+        stage_time = time.time()
+        if i == 1:
+            self.stage_time[i-1] = stage_time - self.start_time
+        else:
+            self.stage_time[i-1] = stage_time - self.start_time - self.stage_time[i-2]
+        
+    def print_stage_time(self) -> List[float]:
+        for i in range(len(self.stage_time)):
+            print("Stage {} is executed in {:.5f} seconds".format(i + 1, self.stage_time[i]))
+        print("Total execution time is {:.5f} seconds".format(sum(self.stage_time)))
