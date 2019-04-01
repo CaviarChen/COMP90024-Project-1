@@ -130,7 +130,7 @@ class TimeCounter:
         else:
             self.stage_time[i-1] = stage_time - self.start_time - self.stage_time[i-2]
         
-    def print_stage_time(self) -> List[float]:
+    def print_stage_time(self) -> None:
         for i in range(len(self.stage_time)):
             print("Stage {} is executed in {:.5f} seconds".format(i + 1, self.stage_time[i]))
         print("Total execution time is {:.5f} seconds".format(sum(self.stage_time)))

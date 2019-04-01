@@ -73,7 +73,7 @@ def main() -> None:
     # Stage 3: the root node collects the results of different grid and output
     # ----
     if node_rank == 0:
-        final_results = [None for _ in range(grid_num)]
+        final_results: List[Optional[Any]] = [None for _ in range(grid_num)]
 
     for i in range(grid_num):
         assigned_node = i % node_num
@@ -100,19 +100,12 @@ def main() -> None:
             post_list.append((i, final_results[i][0]))
             hashtag_list.append(final_results[i][1])
 
-        post_list = sorted(post_list, key=lambda x: x[1], reverse=True)
+        post_list.sort(key=lambda x: x[1], reverse=True)
 
         # Output the total count of posts in each grid cell
-        print("------------------------- Total posts -------------------------")
-        for i in post_list:
-            print("{}: {} posts".format(melb_grid.grid_idx_to_id(i[0]), i[1]))
+        for post_i in post_list:
+            print("{}: {} posts {}".format(melb_grid.grid_idx_to_id(post_i[0]), post_i[1], tuple(hashtag_list[post_i[0]])))
 
-        # Output the top 5 hashtags in each grid cell
-        print('------------------------- Top 5 hashtags -------------------------')
-        for i in post_list:
-            print("{}: {}".format(melb_grid.grid_idx_to_id(i[0]), tuple(hashtag_list[i[0]])))
-
-        # Output the execution time information
         timer.print_stage_time()
 
 if __name__ == "__main__":
