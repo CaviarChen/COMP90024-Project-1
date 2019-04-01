@@ -5,9 +5,16 @@ import helper
 
 
 def main() -> None:
-    # time clock
-    timer = helper.TimeCounter()
+    # Initial MPI
+    mpi_comm = MPI.COMM_WORLD
+    node_num = mpi_comm.Get_size()
+    node_rank = mpi_comm.Get_rank()
 
+    # Start time clock
+    if node_rank == 0:
+        timer = helper.TimeCounter()
+
+    # Parser usage
     parser = argparse.ArgumentParser(usage='mpiexec -n 1 python src/main.py dataset/melbGrid.json dataset/tinyTwitter.json')
     parser.add_argument('melbgrid', type=str)
     parser.add_argument('twitter', type=str)
@@ -17,10 +24,6 @@ def main() -> None:
     grid_num = melb_grid.get_grid_num()
 
     counters: List[Optional[helper.GridDataCounter]] = [helper.GridDataCounter() for _ in range(grid_num)]
-
-    mpi_comm = MPI.COMM_WORLD
-    node_num = mpi_comm.Get_size()
-    node_rank = mpi_comm.Get_rank()
 
     # ----
     # Stage 1: read file & count data separately
@@ -41,7 +44,7 @@ def main() -> None:
     del twitter_reader
     # print([c._post_count for c in counters])
     if node_rank == 0:
-        timer.add_stage_time(1)
+        timer.add_stage_time()
 
     # ----
     # Stage 2: collect & merge data separately (each node will be assgined some grids)
@@ -70,7 +73,7 @@ def main() -> None:
             results[i] = counter.get_result(5)
 
     if node_rank == 0:
-        timer.add_stage_time(2)
+        timer.add_stage_time()
 
     # ----
     # Stage 3: the root node collects the results of different grid and output
@@ -93,10 +96,10 @@ def main() -> None:
             final_results[i] = mpi_comm.recv(source=assigned_node, tag=i)
             continue
     del results        
-    
+
     if node_rank == 0:
-        timer.add_stage_time(3)
-        
+        timer.add_stage_time()
+
         post_list = []
         hashtag_list = []
         for i in range(len(final_results)):
@@ -105,10 +108,10 @@ def main() -> None:
 
         post_list.sort(key=lambda x: x[1], reverse=True)
 
-        # Output the total count of posts in each grid cell
+        # Output the count and top 5 hashtags in each grid cell
         for post_i in post_list:
             print("{}: {} posts {}".format(melb_grid.grid_idx_to_id(post_i[0]), post_i[1], tuple(hashtag_list[post_i[0]])))
-
+        # Output the execution time information
         timer.print_stage_time()
 
 if __name__ == "__main__":

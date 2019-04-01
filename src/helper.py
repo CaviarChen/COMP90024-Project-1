@@ -120,17 +120,16 @@ class GridDataCounter:
 
 class TimeCounter:
     def __init__(self) -> None:
-        self.start_time = time.time()
-        self.stage_time: List[float] = [None, None, None]
+        self._stage_time: List[float] = []
+        self.add_stage_time()
     
-    def add_stage_time(self, i: int) -> None:
-        stage_time = time.time()
-        if i == 1:
-            self.stage_time[i-1] = stage_time - self.start_time
-        else:
-            self.stage_time[i-1] = stage_time - self.start_time - self.stage_time[i-2]
+    def add_stage_time(self) -> None:
+        self._stage_time.append(time.time())
         
     def print_stage_time(self) -> None:
-        for i in range(len(self.stage_time)):
-            print("Stage {} is executed in {:.5f} seconds".format(i + 1, self.stage_time[i]))
-        print("Total execution time is {:.5f} seconds".format(sum(self.stage_time)))
+        output_time = []
+        for i in range(1, len(self._stage_time)):
+            output_time.append(self._stage_time[i] - self._stage_time[i-1])
+            print("Stage {} is executed in {:.5f} seconds".format(i, self._stage_time[i] - self._stage_time[i-1]))
+
+        print("Total execution time is {:.5f} seconds".format(sum(output_time)))
