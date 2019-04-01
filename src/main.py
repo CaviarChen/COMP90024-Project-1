@@ -47,17 +47,19 @@ def main() -> None:
         if assigned_node != node_rank:
             # not assigned to this node, free counter
             counters[i] = None
+    del counters
     
     # merge data
     results: List[Any] = [None for _ in range(grid_num)]
     for i in range(grid_num):
-        if counters[i] is not None:
+        if gathered_data[i] is not None:
+            counter = helper.GridDataCounter()
             for d in gathered_data[i]:
                 (post_num, tag_list) = d
-                counters[i].add_post(post_num)
-                counters[i].merge_tags(tag_list)
-                # top 5 tags
-                results[i] = counters[i].get_result(5)
+                counter.add_post(post_num)
+                counter.merge_tags(tag_list)
+            # top 5 tags
+            results[i] = counter.get_result(5)
 
     # ----
     # Stage 3: the root node collects the results of different grid and output
