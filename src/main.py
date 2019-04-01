@@ -31,6 +31,9 @@ def main() -> None:
         if data is None:
             break
         (_, coord, hashtags) = data
+        # skip when the data is not right
+        if len(coord) != 2:
+            continue 
         idx = melb_grid.find_grid_idx(coord[0], coord[1])
         if idx is not None:
             counters[idx].add_post()
