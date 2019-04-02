@@ -115,8 +115,15 @@ class GridDataCounter:
         return (self._post_count, list(self._tag_dict.items()))
 
     def get_result(self, n: int) -> Tuple[int, List[Tuple[str, int]]]:
-        tags = heapq.nlargest(n, self._tag_dict.items(), key= lambda x: x[1])
-        return (self._post_count, tags)
+
+        topk_freq = heapq.nlargest(n, set(self._tag_dict.values()))
+        if len(topk_freq) < n:
+            # not enought tags, take everything
+            tags = list(self._tag_dict.items())
+        else:
+            tags = list(filter(lambda x: x[1] >= topk_freq[-1], self._tag_dict.items()))
+
+        return (self._post_count, sorted(tags, key=lambda x: -x[1]))
 
 class Timer:
     def __init__(self) -> None:
