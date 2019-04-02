@@ -118,18 +118,19 @@ class GridDataCounter:
         tags = heapq.nlargest(n, self._tag_dict.items(), key= lambda x: x[1])
         return (self._post_count, tags)
 
-class TimeCounter:
+class Timer:
     def __init__(self) -> None:
-        self._stage_time: List[float] = []
-        self.add_stage_time()
+        self._stage_time: List[Tuple[float, str]] = []
+        self.add_stage_time("")
     
-    def add_stage_time(self) -> None:
-        self._stage_time.append(time.time())
+    def add_stage_time(self, name: str) -> None:
+        self._stage_time.append((time.time(), name))
         
-    def print_stage_time(self) -> None:
-        output_time = []
+    def print_result(self) -> None:
+        total_time: float = 0
         for i in range(1, len(self._stage_time)):
-            output_time.append(self._stage_time[i] - self._stage_time[i-1])
-            print("Stage {} is executed in {:.5f} seconds".format(i, self._stage_time[i] - self._stage_time[i-1]))
+            time_used = self._stage_time[i][0] - self._stage_time[i-1][0]
+            total_time += time_used
+            print("Stage {} is executed in {:.5f} seconds".format(self._stage_time[i][1], time_used))
 
-        print("Total execution time is {:.5f} seconds".format(sum(output_time)))
+        print("Total execution time is {:.5f} seconds".format(total_time))
