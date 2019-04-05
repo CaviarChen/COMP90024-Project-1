@@ -70,7 +70,7 @@ class TwitterReader:
         # parse row
         try:
             data = json.loads(line.rstrip(",\r\n "))            
-            coord = list(map(float, data['value']['geometry']['coordinates']))
+            coord = list(map(float, data['doc']['coordinates']['coordinates']))
             # check that coordinates have two values
             assert len(coord) == 2
             hashtags = [str(item['text']).lower() for item in data['doc']['entities']['hashtags']]
