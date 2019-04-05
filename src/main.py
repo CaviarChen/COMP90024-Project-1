@@ -24,7 +24,7 @@ class Task:
         self._mpi_comm = mpi_comm
         self._node_num = mpi_comm.Get_size()
         self._node_rank = mpi_comm.Get_rank()
-        
+
         if self._node_rank == 0:
             self._print_title("Task")
             print("task_time:   ", datetime.datetime.now())
@@ -37,7 +37,7 @@ class Task:
         # Start timer
         if self._node_rank == 0:
             timer = helper.Timer()
-        
+
         # stage 1
         (melb_grid, counters) = self._stage1()
         if self._node_rank == 0:

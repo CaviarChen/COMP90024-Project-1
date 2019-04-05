@@ -66,7 +66,7 @@ class TwitterReader:
         # stop if reach the last line (eg. ']}') or reachs out of the chunk that assigned to this node
         if self._file.tell() > self._file_end or line.strip() == ']}':
             return None
-        
+
         # parse row
         try:
             data = json.loads(line.rstrip(",\r\n "))            
@@ -78,7 +78,7 @@ class TwitterReader:
             hashtags = list(set(hashtags))
         except Exception as e:
             # parsing error
-            print("ERRPR:\n", e)
+            # print("ERRPR:\n", e)
             return (self._line_count, [], [])
 
         return (self._line_count, coord, hashtags)
@@ -93,7 +93,7 @@ class GridDataCounter:
 
     def add_post(self, num: int = 1) -> None:
         self._post_count += num
-    
+
     def add_tag(self, tag: str) -> None:
         if tag in self._tag_dict:
             self._tag_dict[tag] += 1
@@ -103,7 +103,7 @@ class GridDataCounter:
     def add_tags(self, tags: List[str]) -> None:
         for t in tags:
             self.add_tag(t)
-    
+
     def merge_tags(self, tags: List[Tuple[str, int]]) -> None:
         for tag in tags:
             if tag[0] in self._tag_dict:
@@ -129,10 +129,10 @@ class Timer:
     def __init__(self) -> None:
         self._stage_time: List[Tuple[float, str]] = []
         self.add_stage_time("")
-    
+
     def add_stage_time(self, name: str) -> None:
         self._stage_time.append((time.time(), name))
-        
+
     def print_result(self) -> None:
         total_time: float = 0
         for i in range(1, len(self._stage_time)):
