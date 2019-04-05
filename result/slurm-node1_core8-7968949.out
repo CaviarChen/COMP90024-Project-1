@@ -1,0 +1,39 @@
+
+  Task
+--------------------
+task_time:    2019-04-05 17:51:32.777416
+grid_file:    melbGrid.json
+twitter_file: bigTwitter.json
+node_num:     8
+
+
+  Result
+--------------------
+C2: 145096 posts (('melbourne', 13448), ('job', 2127), ('australia', 1781), ('jobs', 1300), ('hiring', 986))
+B2: 79633 posts (('melbourne', 1027), ('auspol', 354), ('incident', 314), ('victraffic', 239), ('firealarm', 237))
+C3: 53299 posts (('melbourne', 612), ('incident', 317), ('victraffic', 297), ('firealarm', 232), ('structurefire', 219))
+B3: 26550 posts (('incident', 222), ('melbourne', 213), ('structurefire', 177), ('nonstructurefire', 159), ('firealarm', 158))
+C4: 19699 posts (('auspol', 279), ('incident', 195), ('structurefire', 179), ('savedallas', 166), ('victraffic', 144))
+B1: 16507 posts (('melbourne', 226), ('structurefire', 134), ('nonstructurefire', 128), ('incident', 111), ('vote5sos', 106))
+D4: 14497 posts (('nowplaying', 1730), ('karishmatannacraze', 83), ('victraffic', 79), ('structurefire', 70), ('noblepark', 69))
+D3: 13388 posts (('melbourne', 99), ('incident', 67), ('beach', 66), ('victraffic', 63), ('structurefire', 62))
+C1: 8427 posts (('incident', 112), ('structurefire', 98), ('camto4mill', 73), ('melbourne', 69), ('christmasfollowparty', 62))
+B4: 5450 posts (('melbourne', 59), ('nonstructurefire', 55), ('incident', 49), ('structurefire', 49), ('fire', 31), ('smallzywelcomeshome5sos', 27), ('hazmat', 27))
+A3: 5036 posts (('raw', 39), ('structurefire', 38), ('nonstructurefire', 30), ('saveconstantine', 26), ('epping', 21))
+A2: 4165 posts (('krazykristmas', 177), ('nonstructurefire', 72), ('structurefire', 70), ('rcl1milliongiveaway', 59), ('egsholidaygiveaway', 57))
+C5: 4106 posts (('melbourne', 60), ('victraffic', 31), ('photo', 20), ('australia', 18), ('1000steps', 18), ('dandenongs', 16))
+D5: 3248 posts (('lost', 30), ('cat', 28), ('somebodytocon', 27), ('melbourne', 25), ('findjasper', 23))
+A1: 2533 posts (('melbourne', 15), ('bbau', 15), ('tattoo', 14), ('worldjudo2014', 11), ('vobis', 11), ('judo', 10), ('tattooist', 9), ('my', 9))
+A4: 310 posts (('auspol', 7), ('lnp', 6), ('qldvotes', 6), ('libspill', 5), ('photo', 3), ('incident', 3), ('grassfire', 3), ('vicfires', 3), ('win', 2), ('always', 2), ('victraffic', 2), ('countdown', 2), ('cycling', 2), ('celebmerv', 2), ('goingdownswinging', 2), ('market', 2), ('community', 2), ('inclusion', 2), ('joy', 2), ('mytribe', 2), ('laughterclass', 2), ('birthday', 2), ('happiness', 2))
+
+  Timer
+--------------------
+Stage 1  is executed in 44.60127 seconds
+Stage 2a is executed in 0.04751 seconds
+Stage 2b is executed in 0.00175 seconds
+Stage 3  is executed in 0.01527 seconds
+Total execution time is 44.66581 seconds
+
+real	0m44.915s
+user	0m0.017s
+sys	0m0.022s
