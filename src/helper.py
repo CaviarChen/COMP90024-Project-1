@@ -133,7 +133,7 @@ class TwitterReader:
             coord = list(map(float, data['doc']['coordinates']['coordinates']))
             # check that coordinates have two values
             assert len(coord) == 2
-            hashtags = [str(item['text']).lower() for item in data['doc']['entities']['hashtags']]
+            hashtags = self._extract_hashtags(data['doc']['text'])
             # remove duplicates
             hashtags = list(set(hashtags))
         except Exception as e:
@@ -142,6 +142,16 @@ class TwitterReader:
             return (self._line_count, [], [])
 
         return (self._line_count, coord, hashtags)
+
+    def _extract_hashtags(self, text: str) -> List[str]:
+        # print(text)
+        tags = set()
+        # exact match the (space)#(string)(space) pattern
+        # reomve the first and last one since it doesn't have a space in front(back)
+        for s in text.split(' ')[1:-1]:
+            if len(s) >= 2 and s[0] == '#':
+                tags.add(s[1:].lower())
+        return list(tags)
 
     def __del__(self) -> None:
         """Close the file.
