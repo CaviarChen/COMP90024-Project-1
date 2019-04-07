@@ -75,17 +75,20 @@ class TwitterReader:
         _line_count: line count of line.
         _file_start: start position of file.
         _file_end: end position of file.
+        _melb_grid: melbourne grid helper object
     """
-    def __init__(self, file_name: str, node_num: int, node_rank: int) -> None:
+    def __init__(self, file_name: str, node_num: int, node_rank: int, melb_grid: MelbGrid) -> None:
         """Initialization.
 
         Args:
             file_name (str): file name of twitter data.
             node_num (int): the total number of nodes.
             node_rank (int): the rank of current node.
+            melb_grid (MelbGrid): an instance of the MelbGrid Class
         """
         self._file = open(file_name, 'r')
         self._line_count = 0
+        self._melb_grid = melb_grid
 
         # divide file
         file_size = os.fstat(self._file.fileno()).st_size
@@ -116,11 +119,11 @@ class TwitterReader:
             pass
         return self._file.tell()
 
-    def read_one_twitter(self) -> Optional[Tuple[int, List[float], List[str]]]:
+    def read_one_twitter(self) -> Optional[Tuple[int, Optional[int], List[str]]]:
         """Read one twitter data to extract the data.
 
         Returns:
-            (int, [float, [str]]): line count and list of coordinate and its hashtag list.
+            (int, int, [str]]): line count and gird_idx of the tweet (None if out of range) and its hashtag list.
         """
         line = self._file.readline()
         # stop if reach the last line (eg. ']}') or reachs out of the chunk that assigned to this node
@@ -133,18 +136,19 @@ class TwitterReader:
             coord = list(map(float, data['doc']['coordinates']['coordinates']))
             # check that coordinates have two values
             assert len(coord) == 2
+            grid_idx = self._melb_grid.find_grid_idx(coord[0], coord[1])
+            # out of range
+            if grid_idx is None:
+                return (self._line_count, None, [])
+
             hashtags = self._extract_hashtags(data['doc']['text'])
-            # remove duplicates
-            hashtags = list(set(hashtags))
+            return (self._line_count, grid_idx, hashtags)
         except Exception as e:
             # parsing error
             # print("ERRPR:\n", e)
-            return (self._line_count, [], [])
-
-        return (self._line_count, coord, hashtags)
+            return (self._line_count, None, [])
 
     def _extract_hashtags(self, text: str) -> List[str]:
-        # print(text)
         tags = set()
         # exact match the (space)#(string)(space) pattern
         # reomve the first and last one since it doesn't have a space in front(back)

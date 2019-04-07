@@ -99,19 +99,17 @@ class Task:
 
         counters: List[helper.GridDataCounter] = [helper.GridDataCounter() for _ in range(grid_num)]
 
-        twitter_reader = helper.TwitterReader(self._twitter_file, self._node_num, self._node_rank)
+        twitter_reader = helper.TwitterReader(self._twitter_file, self._node_num, self._node_rank, melb_grid)
         while True:
             data = twitter_reader.read_one_twitter()
+            
             if data is None:
                 break
-            (_, coord, hashtags) = data
-            # skip when the data is not right
-            if len(coord) != 2:
-                continue
-            idx = melb_grid.find_grid_idx(coord[0], coord[1])
-            if idx is not None:
-                counters[idx].add_post()
-                counters[idx].add_tags(hashtags)
+            (_, grid_idx, hashtags) = data
+
+            if grid_idx is not None:
+                counters[grid_idx].add_post()
+                counters[grid_idx].add_tags(hashtags)
         del twitter_reader
 
         return (melb_grid, counters)
