@@ -123,7 +123,7 @@ class TwitterReader:
         """Read one twitter data to extract the data.
 
         Returns:
-            (int, int, [str]]): line count and gird_idx of the tweet (None if out of range) and its hashtag list.
+            (int, int, [str]): line count and gird_idx of the tweet (None if out of range) and its hashtag list.
         """
         line = self._file.readline()
         # stop if reach the last line (eg. ']}') or reachs out of the chunk that assigned to this node

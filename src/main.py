@@ -129,7 +129,7 @@ class Task:
         """
         gathered_data: List[Optional[List[Any]]] = [None for _ in range(grid_num)]
         for i in range(grid_num):
-            # node with rank == assigned_node shoule handled this grid
+            # node with rank == assigned_node should handled this grid
             assigned_node = i % self._node_num
             gathered_data[i] = self._mpi_comm.gather(counters[i].marshal_data(), root=assigned_node)
             if assigned_node != self._node_rank:

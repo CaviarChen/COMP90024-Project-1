@@ -1,10 +1,10 @@
 
   Task
 --------------------
-task_time:    2019-04-07 15:20:55.742087
+task_time:    2019-04-08 13:39:32.794339
 grid_file:    melbGrid.json
 twitter_file: bigTwitter.json
-node_num:     8
+node_num:     1
 
 
   Result
@@ -24,16 +24,16 @@ A2: 4165 posts (('krazykristmas', 165), ('egsholidaygiveaway', 57), ('rcl1millio
 C5: 4106 posts (('melbourne', 53), ('australia', 17), ('dandenongs', 13), ('1000steps', 11), ('spring', 10), ('travel', 10))
 D5: 3248 posts (('cat,', 25), ('somebodytocon', 23), ('melbourne', 22), ('lost', 20), ('voteukvampettes', 18))
 A1: 2533 posts (('tattoo', 11), ('melbourne', 11), ('worldjudo2014', 9), ('judo', 8), ('vobis', 8), ('design', 8), ('drawing', 8), ('bigbrother', 6), ('bbau', 6), ('tattoolife', 6), ('life', 5), ('tattooist', 5))
-A4: 310 posts (('lnp', 4), ('qldvotes', 3), ('vicfires', 3), ('market', 2), ('community', 2), ('mytribe', 2), ('birthday', 2), ('laughterclass', 2), ('joy', 2), ('commgames', 1), ('jaffles.', 1), ('labswim', 1), ('labfun', 1), ('labwet', 1), ('labiam', 1), ('fromwhereiride', 1), ('win', 1), ('icebucketchallenge', 1), ('steamtrain', 1), ('loseweight', 1), ('herbalife', 1), ('fast', 1), ('high', 1), ('intensity', 1), ('ball', 1), ('comon', 1), ('igersdaily', 1), ('victoria…', 1), ('igersmelbourne', 1), ('vsco', 1), ('igers', 1), ('always', 1), ('do', 1), ('hawthorn', 1), ('getaway', 1), ('standrews', 1), ('paddocktoplate', 1), ('vicvotes', 1), ('fisher.', 1), ('vce', 1), ('classof2014', 1), ('cycling', 1), ('sbs가요대전', 1), ('kriskringle', 1), ('smashit', 1), ('incident,', 1), ('fringies', 1), ('craftbeer.', 1), ('qldelection?', 1), ('screecher', 1), ('ausopen?', 1), ('socceroos,watch', 1), ('auspol', 1), ('libspill', 1), ('lnp,', 1), ('labour', 1), ('win!', 1), ('goingdownswinging', 1), ('whitenightmelb', 1), ('good', 1), ('speedy', 1), ('operation', 1), ('bachiewood', 1), ('guitar', 1), ('healing', 1), ('melbourne', 1), ('buskin', 1), ('🚴🏻💥', 1), ('earlyaf', 1), ('banter💯', 1), ('hurstbridge', 1), ('jan1st', 1), ('wellspent', 1), ('lovinglifeinaus…', 1), ('happiness', 1), ('inclusion…', 1), ('inclusion', 1), ('diversity', 1), ('acceptance…', 1), ('rainyevening', 1), ('australia', 1), ('nature', 1), ('winter', 1), ('ilovewinter', 1), ('beautyeverywhere…', 1), ('australianbush', 1))
+A4: 310 posts (('lnp', 4), ('qldvotes', 3), ('vicfires', 3), ('market', 2), ('laughterclass', 2), ('birthday', 2), ('joy', 2), ('community', 2), ('mytribe', 2), ('commgames', 1), ('jaffles.', 1), ('labfun', 1), ('labiam', 1), ('labwet', 1), ('labswim', 1), ('fromwhereiride', 1), ('win', 1), ('icebucketchallenge', 1), ('loseweight', 1), ('steamtrain', 1), ('herbalife', 1), ('comon', 1), ('fast', 1), ('high', 1), ('ball', 1), ('intensity', 1), ('igersdaily', 1), ('vsco', 1), ('victoria…', 1), ('igersmelbourne', 1), ('igers', 1), ('do', 1), ('hawthorn', 1), ('always', 1), ('getaway', 1), ('standrews', 1), ('paddocktoplate', 1), ('vicvotes', 1), ('fisher.', 1), ('classof2014', 1), ('vce', 1), ('cycling', 1), ('sbs가요대전', 1), ('smashit', 1), ('kriskringle', 1), ('incident,', 1), ('fringies', 1), ('craftbeer.', 1), ('qldelection?', 1), ('screecher', 1), ('ausopen?', 1), ('socceroos,watch', 1), ('auspol', 1), ('libspill', 1), ('lnp,', 1), ('labour', 1), ('win!', 1), ('goingdownswinging', 1), ('whitenightmelb', 1), ('operation', 1), ('speedy', 1), ('good', 1), ('bachiewood', 1), ('buskin', 1), ('healing', 1), ('melbourne', 1), ('guitar', 1), ('🚴🏻💥', 1), ('banter💯', 1), ('earlyaf', 1), ('hurstbridge', 1), ('wellspent', 1), ('jan1st', 1), ('lovinglifeinaus…', 1), ('happiness', 1), ('inclusion…', 1), ('diversity', 1), ('inclusion', 1), ('acceptance…', 1), ('ilovewinter', 1), ('australia', 1), ('winter', 1), ('australianbush', 1), ('nature', 1), ('beautyeverywhere…', 1), ('rainyevening', 1))
 
   Timer
 --------------------
-Stage 1  is executed in 48.02012 seconds
-Stage 2a is executed in 0.04200 seconds
-Stage 2b is executed in 0.00121 seconds
-Stage 3  is executed in 0.01708 seconds
-Total execution time is 48.08040 seconds
+Stage 1  is executed in 326.82905 seconds
+Stage 2a is executed in 0.05234 seconds
+Stage 2b is executed in 0.04319 seconds
+Stage 3  is executed in 0.00028 seconds
+Total execution time is 326.92486 seconds
 
-real	0m48.344s
-user	0m0.020s
-sys	0m0.018s
+real	5m28.712s
+user	0m0.015s
+sys	0m0.024s
